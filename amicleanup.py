@@ -14,7 +14,7 @@ def cleanup(region_id='us-west-1'):
         image = resource.Image(image_data['ImageId'])
         name_tag = [tag['Value'] for tag in image.tags if tag['Key'] == 'Name']
         if name_tag:
-            print("Deregistering {name_tag[0]}")
+            print("Deregistering {name_tag}".format(name_tag=name_tag[0]))
         image.deregister()
 
 if __name__ == '__main__':
