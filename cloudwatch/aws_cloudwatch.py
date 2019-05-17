@@ -7,9 +7,9 @@ import awsutils
 session = awsutils.get_session("us-west-1")
 client = session.client('cloudwatch')
 
-region = "ap-south-1"
-ec2_instance_id = "i-0d9e556b024020959"
-user_account_id = 199904371476
+region = "us-west-1"
+ec2_instance_id = "i-0ce24ed4cc2535075"
+user_account_id = 507026312405
 '''
 Create a Dashboard
 '''
@@ -36,17 +36,19 @@ dashboard_body = {
             "period":300,
             "stat":"Average",
             "region":region,
-            "title":"EC2 Instance CPU"
+            "title":"EC2 Instance CPU Utilization"
          }
       }
    ]
 }
 json_body = json.dumps(dashboard_body)
+
 response = client.put_dashboard(
-    DashboardName="mco_test",
+    DashboardName="aws_training_test",
     DashboardBody=json_body
 )
 pprint.pprint(response)
+
 """
 
 '''
@@ -97,7 +99,7 @@ response = client.put_metric_data(
             'Dimensions': [
                 {
                     'Name': 'UNIQUE_PAGES',
-                    'Value': 'URLS'
+                    'Value': 'https://aws.amazon.com/cloudwatch'
                 },
             ],
             'Unit': 'None',
@@ -113,13 +115,13 @@ pprint.pprint(response)
 List Metric Names
 '''
 
-# response = client.list_metrics(
+#response = client.list_metrics(
 #     Namespace = 'SITE/TRAFFIC',
 #     MetricName = 'PAGES_VISITED'
-# )
-# pprint.pprint(response)
-# paginator = client.get_paginator('list_metrics')
-# for response in paginator.paginate(Dimensions=[{'Name': 'UNIQUE_PAGES'}],
+#)
+#pprint.pprint(response)
+#paginator = client.get_paginator('list_metrics')
+#for response in paginator.paginate(Dimensions=[{'Name': 'UNIQUE_PAGES'}],
 #                                   MetricName='PAGES_VISITED',
 #                                   Namespace='SITE/TRAFFIC'):
 #    pprint.pprint(response['Metrics'])
@@ -127,6 +129,6 @@ List Metric Names
 '''
 List all cloudwatch alarms
 '''
-# paginator = client.get_paginator('describe_alarms')
-# for response in paginator.paginate(StateValue='INSUFFICIENT_DATA'):
+#paginator = client.get_paginator('describe_alarms')
+#for response in paginator.paginate(StateValue='INSUFFICIENT_DATA'):
 #    pprint.pprint(response['MetricAlarms'])

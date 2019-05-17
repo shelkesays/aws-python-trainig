@@ -73,10 +73,10 @@ Taging ec2 instances
 '''
 Creating ec2 instance from backup image
 '''
-# image_id = 'ami-0312992fa03073425'
-# ec2_instance = client.run_instances(ImageId=image_id,
-#                                    MinCount=1, MaxCount=1, InstanceType='t2.micro')
-# pprint.pprint(ec2_instance)
+image_id = 'ami-0312992fa03073425'
+ec2_instance = client.run_instances(ImageId=image_id,
+                                    MinCount=1, MaxCount=1, InstanceType='t2.micro')
+pprint.pprint(ec2_instance)
 
 '''
 Removing backup images
